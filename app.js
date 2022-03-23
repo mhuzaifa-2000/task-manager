@@ -58,6 +58,11 @@ app.get("/tasks", (req, res) => {
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
+app.get("/developers", (req, res) => {
+  User.find({ userType: "Developer" })
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
 //MongoDB connection
 mongoose.connect(
   "mongodb+srv://admin:admin123@cluster1.r7ipy.mongodb.net/taskManagerDB?retryWrites=true&w=majority",
