@@ -35,7 +35,9 @@ app.post("/login", (req, res) => {
         res.status(200).json({ message: "Logged In", data });
       else res.status(200).json({ message: "Wrong Password" });
     })
-    .catch((err) => res.status(400).json(err));
+    .catch((err) =>
+      res.status(400).json({ message: "User not found", ...err })
+    );
 });
 
 app.post("/assignTask", (req, res) => {
@@ -51,9 +53,9 @@ app.post("/assignTask", (req, res) => {
   task
     .save()
     .then((data) =>
-      res.status(200).json({ message: "New Task Assigned", ...data })
+      res.status(200).json({ message: "New Task Assigned", data })
     )
-    .catch((err) => res.status(400).json({ message: "Error Occured", ...err }));
+    .catch((err) => res.status(400).json({ message: "Error Occured", err }));
 });
 app.get("/tasks", (req, res) => {
   Task.find({})
