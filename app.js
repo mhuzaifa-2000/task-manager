@@ -39,11 +39,13 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/assignTask", (req, res) => {
-  const { title, description, code, assignedTo } = req.body;
+  const { title, description, code, assignedDeveloper, assignedTester } =
+    req.body;
   const task = new Task({
     title: title,
     description: description,
-    assignedTo: assignedTo,
+    assignedDeveloper: assignedDeveloper,
+    assignedTester: assignedTester,
     code: code,
   });
   task
@@ -60,6 +62,11 @@ app.get("/tasks", (req, res) => {
 });
 app.get("/developers", (req, res) => {
   User.find({ userType: "Developer" })
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
+app.get("/testers", (req, res) => {
+  User.find({ userType: "Tester" })
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });

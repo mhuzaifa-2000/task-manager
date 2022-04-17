@@ -12,7 +12,12 @@ const taskSchema = new mongoose.Schema(
     code: {
       type: String,
     },
-    assignedTo: {
+    assignedDeveloper: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: "true",
+    },
+    assignedTester: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: "true",
